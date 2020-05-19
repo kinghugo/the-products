@@ -3,9 +3,10 @@ const express = require('express')
 const productsControllers = require('./controlers/produts.controllers')
 const routes = express.Router()
 
-routes.get('/', productsControllers.index)
-routes.post('/', productsControllers.create)
-routes.get('/:id' , productsControllers.show)
-routes.put('/:id', productsControllers.update)
-routes.delete('/:id',productsControllers.destroy)
+routes.get('products/', productsControllers.index)
+routes.post('product/', productsControllers.create)
+routes.get('product/:id' , productsControllers.show)
+routes.put('product/:id', productsControllers.update)
+routes.delete('product/:id',productsControllers.destroy)
+
 module.exports = routes

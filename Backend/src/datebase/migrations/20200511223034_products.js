@@ -6,6 +6,12 @@ exports.up = function (knex) {
         table.string('name_product').notNullable()
         table.string('category').notNullable()
         table.string('value').notNullable()
+        table.string('description').notNullable()
+        table.string('image').notNullable()
+        
+        
+        
+
     })
   
 };
