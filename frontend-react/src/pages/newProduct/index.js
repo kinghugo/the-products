@@ -36,7 +36,7 @@ export default function NewProduct() {
         try {
 
            id_product!== null ? api.put(`product/${id_product}`,data): api.post('product', data)
-            history.push('/')
+            history.push('/home')
 
         } catch (error) {
             alert('Erro ao cadastrar o Produto,tente novamente ou mais tarde')
@@ -52,7 +52,7 @@ export default function NewProduct() {
             <div>
             <h1>{title}</h1>
                 <span>Insira os Dados Corretamente Para Cadastro Do Novo Produto</span>
-                <Link to="/" className="back-link">
+                <Link to="/home" className="back-link">
                     <FiArrowLeft size={16} color="000" />
                 Voltar Para a Home
                 </Link>
