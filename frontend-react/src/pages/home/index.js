@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
-import { Link } from 'react-router-dom'
-import { FiArrowRight, FiX } from "react-icons/fi";
+import { Link, useHistory } from 'react-router-dom'
+import { FiArrowRight, FiX, FiPower } from "react-icons/fi";
 import api from '../../service/api'
 
 
@@ -9,6 +9,9 @@ import api from '../../service/api'
 export default function Home() {
     const [newProduct, setProduct] = useState([])
     const [newProductDetail, setProductDetail] = useState([])
+    const nameUser = localStorage.getItem('name')
+    const id = localStorage.getItem('id')
+
 
 
     useEffect(() => {
@@ -17,11 +20,11 @@ export default function Home() {
                 setProduct(res.data)
 
             })
-    }, [])
+    }, [id])
 
 
-   async function handleDetail(id) {
-       await api.get(`product/${id}`)
+    async function handleDetail(id) {
+        await api.get(`product/${id}`)
             .then(res => {
                 setProductDetail(res.data)
 
@@ -34,20 +37,30 @@ export default function Home() {
 
 
     }
-    async function handleDelete(id){
-        
+    async function handleDelete(id) {
+
         try {
-           await api.delete(`product/${id}`)
-           setProduct(newProduct.filter(product=> product.id_product !== id))
-           closeDetail()
+            await api.delete(`product/${id}`)
+            setProduct(newProduct.filter(product => product.id_product !== id))
+            closeDetail()
         } catch (error) {
             alert('erro ao deletar o produto')
-            
+
         }
     }
     function formatPrice(price) {
         return Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(price)
     }
+
+    
+    const history = useHistory()
+    function handleLogout() {
+
+        localStorage.clear()
+        history.push('/')
+
+    }
+
 
     return (
         <section className="home-container">
@@ -56,8 +69,13 @@ export default function Home() {
 
             <header>
 
-                <h1>Bem Vindo a Loja Dos Sonhos </h1>
+                <h1>Bem Vindo, {nameUser} </h1>
                 <Link to="/newProduct" className="btn">Cadastrar Novo Produto </Link>
+                <button type="button" onClick={handleLogout}>
+                    <FiPower size={18} color='1F53e4' />
+
+
+                </button>
 
             </header>
             <div>
@@ -72,7 +90,7 @@ export default function Home() {
                                 <span>{formatPrice(product.value)}</span>
                                 <Link to="/home" onClick={() => handleDetail(product.id_product)} className='back-link'>
                                     Detalhes
-                            <FiArrowRight size={18} color="000" />
+                                <FiArrowRight size={18} color="000" />
                                 </Link>
 
                             </li>
@@ -94,7 +112,7 @@ export default function Home() {
                             <p>{newProductDetail.description}</p>
                             <span>{formatPrice(newProductDetail.value)}</span>
                             <Link to={`/editProduct/${newProductDetail.id_product}`} className='btn'>Editar Produto</Link>
-                            <button className='btn btn-ligth'onClick={()=> handleDelete(newProductDetail.id_product)}>Excluir produto</button>
+                            <button className='btn btn-ligth' onClick={() => handleDelete(newProductDetail.id_product)}>Excluir produto</button>
 
 
                         </div>
@@ -109,5 +127,5 @@ export default function Home() {
         </section>
 
     )
-
+        
 }

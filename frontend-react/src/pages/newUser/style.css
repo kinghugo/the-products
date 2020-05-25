@@ -1,4 +1,4 @@
-.newProduct-container{
+.newUser-container{
     width: 90%;
     height: 100vh;
     margin: 0 auto;
@@ -8,19 +8,19 @@
 
 }
 
-.newProduct-container div {
+.newUser-container div {
     width: 100%;
     display: flex;
     flex-direction: column;
 
 }
 
-.newProduct-container div h1{
+.newUser-container div h1{
     font-size: 32px;
 
 }
 
-.newProduct-container div span{
+.newUser-container div span{
     font-size: 20px;
     line-height: 30px;
     color:rgb(12, 12, 12);
@@ -28,35 +28,35 @@
 
 
 }
-.newProduct-container form input{
+.newUser-container form input{
     margin-bottom: 15px;
 
 }
 @media (max-width:768px){
-.newProduct-container form{
+.newUser-container form{
     width: 80%;
 }
 
 }
 @media (max-width:425px){
-    .newProduct-container{
+    .newUser-container{
         flex-direction: column;
         justify-content: space-evenly;
     }
-    .newProduct-container div {
+    .newUser-container div {
         flex-direction: column-reverse;
 
     }
-    .newProduct-container div span{
+    .newUser-container div span{
     display:none ;
     
 }
-.newProduct-container div a {
+.newUser-container div a {
     margin: 20px 0 30px;
 
 
 }
-.newProduct-container form{
+.newUser-container form{
     width: 100%;
     
 }
